@@ -1,0 +1,45 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.example.androiddevchallenge20212021.presentation.components
+
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
+import androidx.constraintlayout.compose.ConstraintLayout
+
+@ExperimentalComposeUiApi
+@Composable
+fun CircularIndeterminateProgressBar(isDisplayed: Boolean, verticalBias: Float) {
+    if (isDisplayed) {
+        ConstraintLayout(
+            modifier = Modifier.fillMaxSize(),
+        ) {
+            val (progressBar) = createRefs()
+            val topBias = createGuidelineFromTop(verticalBias)
+            CircularProgressIndicator(
+                modifier = Modifier.constrainAs(progressBar) {
+                    top.linkTo(topBias)
+                    end.linkTo(parent.end)
+                    start.linkTo(parent.start)
+                },
+                color = MaterialTheme.colors.primary
+            )
+        }
+    }
+}
